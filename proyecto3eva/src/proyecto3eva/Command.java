@@ -27,40 +27,33 @@ public class Command {
 	}
 
 	public boolean execute(Engine engine) {
-		Scanner sc = new Scanner(System.in);
-		CommandParse obj1 = new CommandParse();
 		Engine obj2 = new Engine();
 		do {
-			String opc = sc.next();
-			command = ENUM_COMMAND.valueOf(opc);
 			switch(command) {
 				case HELP:
-					obj1.parse(opc);
 					obj2.HELP();
+					fin = 1;
 					break;
 				case QUIT:
-					obj1.parse(opc);
 					obj2.QUIT();
 					fin = 1;
 					break;
 				case RUN:
-					obj1.parse(opc);
 					obj2.RUN();
+					fin = 1;
 					break;
 				case NEWINST:
-					obj1.parse(opc);
 					obj2.NEWINST_BYTECODE();
+					fin = 1;
 					break;
 				case RESET:
-					obj1.parse(opc);
 					obj2.RESET();
+					fin = 1;
 					break;
 				case REPLACE:
-					obj1.parse(opc);
 					obj2.REPLACE();
+					fin = 1;
 					break;
-				default: 
-					System.out.println("Error en el codigo");
 			}
 		}while(fin == 0);
 		return true;

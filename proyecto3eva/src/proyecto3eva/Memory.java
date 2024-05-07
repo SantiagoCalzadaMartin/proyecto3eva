@@ -1,4 +1,4 @@
-package proyecto3eva;
+	package proyecto3eva;
 
 public class Memory {
 	boolean isEmpty = true;
@@ -28,21 +28,31 @@ public class Memory {
 
 	public void ReSize(int pos) {
 		this.isEmpty = false;
-		if (pos >= this.Size) {
+		if (pos >= memory.length) {
 			Integer memory2[] = new Integer[pos * 2];
+			for(int  i = 0; i < memory2.length; i++) {
+				if(i <= memory.length) {
+					memory2[i] = memory[i];
+				}
+				else {
+					memory2[i] = null;
+				}
+			}
 			this.memory = memory2;
 		}
 	}
 
 	public String ToString() {
-		String frase = "";
+		String fraseFinal = "Memoria: ";
+		String fraseIntermedia = "";
 		if (isEmpty == true) {
-			frase = "<vacia>";
+			fraseIntermedia = "<vacia>";
 		} else {
 			for (int i = 0; i < memory.length; i++) {
-				frase += "[" + i + "]" + ":" + memory[i] + " ";
+				fraseIntermedia += "[" + i + "]" + ":" + memory[i] + " ";
 			}
 		}
-		return frase;
+		fraseFinal += fraseIntermedia;
+		return fraseFinal;
 	}
 }
