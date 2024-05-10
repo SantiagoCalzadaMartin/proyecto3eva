@@ -55,7 +55,7 @@ public class OperandStack {
 		}
 	}
 	
-	public int getCima() {
+	public int peek() {
 		if(isEmpty() == true) {
 			return -1;
 		}

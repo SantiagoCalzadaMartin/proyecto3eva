@@ -18,8 +18,8 @@ public class ByteCodeProgram {
 		}
 	}
 
-	public void get() {
-
+	public ByteCode get(int pos) {
+		return this.program[pos];
 	}
 
 	public void set() {
@@ -39,7 +39,7 @@ public class ByteCodeProgram {
 		return null;
 	}
 
-	public void SetInstruccionPosition(ByteCode bc, int pos) {
+	public void replacePosition(ByteCode bc, int pos) {
 		ReSize(pos);
 		int i = 0;
 		while(i <= program.length) {
@@ -49,12 +49,8 @@ public class ByteCodeProgram {
 			i++;
 		}
 	}
-
-	private ByteCodeProgram program() {
-		return null;
-	}
-
-	private boolean end() {
-		return false;
+	
+	public void setPosition() {
+		//agregar al programa el elemento
 	}
 }

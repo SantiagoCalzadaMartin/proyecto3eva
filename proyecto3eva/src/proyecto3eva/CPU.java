@@ -18,8 +18,8 @@ public class CPU {
 	}
 	
 	public void erase() {
-		this.memoria = null;
-		this.pila = null;
+		this.memoria = new Memory();
+		this.pila = new OperandStack();
 	}
 	
 	public boolean execute(ByteCode instr) {
@@ -27,7 +27,37 @@ public class CPU {
 			sumaPila();
 			return true;
 		}
-		
+		else if(instr.equals(ENUM_BYTECODE.SUB)) {
+			restaPila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.MUL)) {
+			multiplicaPila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.DIV)) {
+			dividePila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.OUT)) {
+			outPila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.HALT)) {
+			isHalt();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.STORE)) {
+			storePila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.LOAD)) {
+			loadPila();
+			return true;
+		}
+		else if(instr.equals(ENUM_BYTECODE.PUSH)) {
+			
+		}
 		return false;
 	}
 	
@@ -35,19 +65,62 @@ public class CPU {
 		return end;
 	}
 	
-	public void sumaPila() {
+	public boolean sumaPila() {
+		int num1 = pila.pop();
+		int num2 = pila.pop();
 		
+		int suma = num1 + num2;
+		pila.push(suma);
+		return true;
 	}
 	
-	public void restaPila() {
+	public boolean restaPila() {
+		int num1 = pila.pop();
+		int num2 = pila.pop();
 		
+		int suma = num1 - num2;
+		pila.push(suma);
+		return true;
 	}
 	
-	public void multiplicaPila() {
+	public boolean multiplicaPila() {
+		int num1 = pila.pop();
+		int num2 = pila.pop();
 		
+		int suma = num1 * num2;
+		pila.push(suma);
+		return true;
 	}
 	
-	public void dividePila() {
+	public boolean dividePila() {
+		int num1 = pila.pop();
+		int num2 = pila.pop();
 		
+		int suma = num1 / num2;
+		pila.push(suma);
+		return true;
 	}
+	
+	public boolean outPila() {
+		System.out.println("La cima de la pila es: " + pila.peek());
+		return true;
+	}
+	
+	public boolean storePila() {
+		
+		
+		return true;
+	}
+	
+	public boolean loadPila() {
+		
+		return true;
+	}
+	
+	public boolean pushPila() {
+		
+		return true;
+	}
+	
+	//todos los bytecode que se pueden poner
 }
