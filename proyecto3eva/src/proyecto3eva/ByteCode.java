@@ -13,6 +13,9 @@ public class ByteCode {
 		this.param = param;
 	}
 	
+	public ByteCode() {
+	}
+
 	public ENUM_BYTECODE getByteCode() {
 		return this.name;
 	}

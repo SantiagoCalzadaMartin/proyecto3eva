@@ -6,7 +6,7 @@ public class ByteCodeProgram {
 	private ByteCode[] program;
 
 	public ByteCodeProgram() {
-		this.NumElements = 10;
+		this.NumElements = 0;
 		this.size = 10;
 		this.program = new ByteCode[size];
 	}
@@ -39,18 +39,33 @@ public class ByteCodeProgram {
 		return null;
 	}
 
-	public void replacePosition(ByteCode bc, int pos) {
+	public boolean replacePosition(ByteCode bc, int pos) {
 		ReSize(pos);
-		int i = 0;
-		while(i <= program.length) {
-			if(i == pos) {
-				program[i] = bc;
-			}
-			i++;
+		if(pos <= this.program.length && program[pos] != null) {
+			program[pos] = bc;
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	
-	public void setPosition() {
-		//agregar al programa el elemento
+	public void setPosition(ByteCode bc) {
+		this.program[NumElements] = bc;
+	}
+	
+	public String runProgram(CPU cpu) {
+		String mensaje = " ";
+		for(int i = 0; i < this.NumElements; i++) {
+			if(!cpu.isHalt() && cpu.execute(this.program[i])) {
+				//texto de la maquina virtual del ejemplo del jhony
+			}
+			else if(!cpu.isHalt()) {
+				//texto de la maquina virtual del ejemplo del jhony				
+			}
+		}
+		cpu.erase();
+		cpu.runCPU();
+		return mensaje;
 	}
 }

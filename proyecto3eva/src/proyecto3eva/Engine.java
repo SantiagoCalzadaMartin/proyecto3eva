@@ -24,11 +24,12 @@ public class Engine {
 	}
 
 	public static void RUN() {
-		
+		ByteCodeProgram ob1 = new ByteCodeProgram();
+		ob1.runProgram(null);
 	}
 
 	public static void NEWINST_BYTECODE() {
-
+	
 	}
 
 	public static void RESET() {

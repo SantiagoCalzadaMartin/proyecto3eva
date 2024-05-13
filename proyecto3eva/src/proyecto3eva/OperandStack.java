@@ -21,7 +21,7 @@ public class OperandStack {
 	}
 	
 	public String ToString() {
-		String frase = "";
+		String frase = "Pila: ";
 		if(isEmpty() == true) {
 			for(int i = 0; i < stack.length; i++) {
 				frase += stack[i];

@@ -3,10 +3,9 @@ package proyecto3eva;
 public class CPU {
 	public OperandStack pila;
 	public Memory memoria;
-	public boolean end;
+	public boolean halt;
 	
 	public CPU() {
-		
 	}
 	
 	public void ToString() {
@@ -56,13 +55,15 @@ public class CPU {
 			return true;
 		}
 		else if(instr.equals(ENUM_BYTECODE.PUSH)) {
-			
+			pushPila();
+			return true;
 		}
 		return false;
 	}
 	
 	public boolean isHalt() {
-		return end;
+		this.halt = true;
+		return halt;
 	}
 	
 	public boolean sumaPila() {
@@ -107,20 +108,25 @@ public class CPU {
 	}
 	
 	public boolean storePila() {
-		
-		
+		ByteCode ob1 = new ByteCode();
+		this.memoria.Write(ob1.getParam(), this.pila.pop());
 		return true;
 	}
 	
 	public boolean loadPila() {
-		
+		ByteCode ob1 = new ByteCode();
+		this.memoria.Read(ob1.getParam());
 		return true;
 	}
 	
 	public boolean pushPila() {
-		
+		ByteCode ob1 = new ByteCode();
+		this.pila.push(ob1.getParam());
 		return true;
 	}
 	
+	public boolean runCPU() {
+		return this.halt = false;
+	}
 	//todos los bytecode que se pueden poner
 }
