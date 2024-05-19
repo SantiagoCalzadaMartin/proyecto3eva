@@ -44,7 +44,7 @@ public class Engine {
 	}
 
 	public boolean RESET() {
-		System.out.println(this.program.erase());
+		this.program.erase();
 		return true;
 	}
 

@@ -81,7 +81,8 @@ public class ByteCodeProgram {
 	}
 
 	public boolean erase() {
-		this.program = new ByteCode[this.size];
+		ByteCode[] program3 = new ByteCode[this.size];
+		this.program = program3;
 		this.NumElements = 0;
 		return true;
 	}
