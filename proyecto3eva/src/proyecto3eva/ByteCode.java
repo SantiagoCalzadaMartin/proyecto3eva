@@ -23,4 +23,16 @@ public class ByteCode {
 	public int getParam() {
 		return this.param;
 	}
+	
+	public String toString() {
+		String cadena = "";
+		
+		if(this.name == ENUM_BYTECODE.PUSH || this.name == ENUM_BYTECODE.LOAD || this.name == ENUM_BYTECODE.STORE) {
+			cadena += getByteCode() + " " + getParam();
+		}
+		else {
+			cadena += getByteCode();
+		}		
+		return cadena;
+	}
 }

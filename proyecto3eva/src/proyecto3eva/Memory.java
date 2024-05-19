@@ -49,7 +49,9 @@ public class Memory {
 			fraseIntermedia = "<vacia>";
 		} else {
 			for (int i = 0; i < memory.length; i++) {
-				fraseIntermedia += "[" + i + "]" + ":" + memory[i] + " ";
+				if(memory[i] != null) {
+					fraseIntermedia += "[" + i + "]" + ":" + memory[i] + " ";
+				}
 			}
 		}
 		fraseFinal += fraseIntermedia;

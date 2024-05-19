@@ -4,38 +4,43 @@ public class ByteCodeParser {
 	
 	public static ByteCode parse(String s) {
 		String[] arrayByteCode = s.split(" ");
-		if(s.length() == 0 || s.length() > 2) {
+		if(arrayByteCode.length <= 0 || arrayByteCode.length > 2) {
 			return null;
 		}
-		else if(s.length() == 1) {
-			switch(arrayByteCode[0]) {
-				case "ADD":
+		else if(arrayByteCode.length == 1) {
+			if(arrayByteCode[0].equalsIgnoreCase("ADD")) {
 					return new ByteCode(ENUM_BYTECODE.ADD);
-				case "SUB":
+			}
+			else if(arrayByteCode[0].equalsIgnoreCase("SUB")) {
 					return new ByteCode(ENUM_BYTECODE.SUB);
-				case "MUL":
+			}
+			else if(arrayByteCode[0].equalsIgnoreCase("MUL")) {
 					return new ByteCode(ENUM_BYTECODE.MUL);
-				case "DIV":
+			}
+			else if(arrayByteCode[0].equalsIgnoreCase("DIV")) {
 					return new ByteCode(ENUM_BYTECODE.DIV);
-				case "OUT":
+			}
+			else if(arrayByteCode[0].equalsIgnoreCase("OUT")) {
 					return new ByteCode(ENUM_BYTECODE.OUT);
-				case "HALT":
+			}
+			else if(arrayByteCode[0].equalsIgnoreCase("HALT")) {
 					return new ByteCode(ENUM_BYTECODE.HALT);
-				default:
+			}
+			else {
 					return null;
 			}
 		}
 		else {
-			switch(arrayByteCode[0]) {
-				case "PUSH":
+			if(arrayByteCode[0].equalsIgnoreCase("PUSH")) {
 					return new ByteCode(ENUM_BYTECODE.PUSH, Integer.parseInt(arrayByteCode[1]));
-				case "LOAD":
+			}
+			if(arrayByteCode[0].equalsIgnoreCase("LOAD")) {
 					return new ByteCode(ENUM_BYTECODE.LOAD, Integer.parseInt(arrayByteCode[1]));
-
-				case "STORE":
+			}
+			if(arrayByteCode[0].equalsIgnoreCase("STORE")) {
 					return new ByteCode(ENUM_BYTECODE.STORE, Integer.parseInt(arrayByteCode[1]));
-
-				default:
+			}
+			else {
 					return null;
 			}
 		}

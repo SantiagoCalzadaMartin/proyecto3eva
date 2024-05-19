@@ -9,9 +9,9 @@ public class Command {
 	private ByteCode instruction;
 	private int replace;
 	
-	public Command(ENUM_COMMAND command, ByteCode intruction) {
+	public Command(ENUM_COMMAND command, ByteCode instruccion) {
 		this.command = command;
-		this.instruction = instruction;
+		this.instruction = instruccion;
 	}
 
 	public Command(ENUM_COMMAND command) {
@@ -22,36 +22,43 @@ public class Command {
 		this.command = command;
 		this.replace = replace;
 	}
+	
+	public ENUM_COMMAND getCommand() {
+		return this.command;
+	}
 
+	public ByteCode getByteCode() {
+		return this.instruction;
+	}
+	
 	public Command() {
 	}
 
 	public boolean execute(Engine engine) {
-		Engine obj2 = new Engine();
 		do {
 			switch(command) {
 				case HELP:
-					obj2.HELP();
+					engine.HELP();
 					fin = 1;
 					break;
 				case QUIT:
-					obj2.QUIT();
+					engine.QUIT();
 					fin = 1;
 					break;
 				case RUN:
-					obj2.RUN();
+					engine.RUN();
 					fin = 1;
 					break;
 				case NEWINST:
-					obj2.NEWINST_BYTECODE();
+					engine.NEWINST_BYTECODE(this.instruction);
 					fin = 1;
 					break;
 				case RESET:
-					obj2.RESET();
+					engine.RESET();
 					fin = 1;
 					break;
 				case REPLACE:
-					obj2.REPLACE();
+					engine.REPLACE(this.replace);
 					fin = 1;
 					break;
 			}

@@ -4,17 +4,28 @@ public class ByteCodeProgram {
 	public int NumElements;
 	public int size;
 	private ByteCode[] program;
+	private ByteCode[] program2;
+	private Command comando;
 
 	public ByteCodeProgram() {
 		this.NumElements = 0;
 		this.size = 10;
 		this.program = new ByteCode[size];
+		this.comando = new Command();
 	}
 
-	public void ReSize(int pos) {
-		if (pos > this.size) {
-			ByteCode program2[] = new ByteCode[this.size * 2];
-			this.program = program2;
+	public void ReSize() {
+		if(this.NumElements >= this.size) {
+		this.size *= 2;
+		this.program2 = new ByteCode[this.size];
+		for (int i = 0; i < program2.length; i++) {
+			if (i < program.length) {
+				program2[i] = program[i];
+			} else {
+				program2[i] = null;
+			}
+		}
+		this.program = this.program2;
 		}
 	}
 
@@ -40,32 +51,48 @@ public class ByteCodeProgram {
 	}
 
 	public boolean replacePosition(ByteCode bc, int pos) {
-		ReSize(pos);
-		if(pos <= this.program.length && program[pos] != null) {
+		if (pos <= this.program.length && program[pos] != null) {
 			program[pos] = bc;
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
-	public void setPosition(ByteCode bc) {
+
+	public boolean setPosition(ByteCode bc) {
+		ReSize();
 		this.program[NumElements] = bc;
+		this.NumElements++;
+		return true;
 	}
-	
+
 	public String runProgram(CPU cpu) {
-		String mensaje = " ";
-		for(int i = 0; i < this.NumElements; i++) {
-			if(!cpu.isHalt() && cpu.execute(this.program[i])) {
-				//texto de la maquina virtual del ejemplo del jhony
-			}
-			else if(!cpu.isHalt()) {
-				//texto de la maquina virtual del ejemplo del jhony				
+		String mensaje = "";
+		for (int i = 0; i < this.NumElements; i++) {
+			if (!cpu.isHalt() && cpu.execute(this.program[i])) {
+				mensaje = mensaje + "Comienza la ejecución del comando " + this.program[i] + "\n" + "Estado de la CPU: " + "\n" + cpu.toString() + "\n";
+			} else if (!cpu.isHalt()) {
+				//mensaje += (""); Esto es un ms de error
 			}
 		}
 		cpu.erase();
 		cpu.runCPU();
 		return mensaje;
+	}
+
+	public boolean erase() {
+		this.program = new ByteCode[this.size];
+		this.NumElements = 0;
+		return true;
+	}
+
+	public String toString() {
+		String cadena = "Programa almacenado: " + "\n";
+		for (int i = 0; i < this.size; i++) {
+			if (this.program[i] != null) {
+				cadena += i + ":" + this.program[i] + "\n";
+			}
+		}
+		return cadena;
 	}
 }

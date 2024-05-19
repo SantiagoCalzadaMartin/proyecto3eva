@@ -4,49 +4,68 @@ import java.util.Scanner;
 
 public class Engine {
 	public static int finalBucle = 1;
+	private ByteCodeProgram program;
+	private CPU cpu;
+	private Command comando;
+	Scanner sc;
 	
 	public Engine() {
-
+		this.program = new ByteCodeProgram();
+		this.cpu = new CPU();
+		this.comando = new Command();
+		this.sc = new Scanner(System.in);
 	}
 
-	public static void HELP() {
+	public boolean HELP() {
 		System.out.println("HELP: muestra esta ayuda");
 		System.out.println("QUIT: cierra la aplicación");
 		System.out.println("RUN: ejecuta el programa");
 		System.out.println("NEWINST BYTECODE: introduce una nueva instrucción al programa");
 		System.out.println("RESET: vacía el programa");
 		System.out.println("REPLACE: reemplaza n instrucción por la del usuario");
+		return true;
 	}
 
-	public static void QUIT() {
+	public boolean QUIT() {
 		System.out.println("Saliste del programa");
 		finalBucle = 0;
+		return true;
 	}
 
-	public static void RUN() {
-		ByteCodeProgram ob1 = new ByteCodeProgram();
-		ob1.runProgram(null);
+	public boolean RUN() {
+		System.out.println(this.program.runProgram(this.cpu) + this.program.toString());
+		return true;
 	}
 
-	public static void NEWINST_BYTECODE() {
-	
+	public boolean NEWINST_BYTECODE(ByteCode BC) {
+		this.program.setPosition(BC);
+		System.out.println(this.program.toString());
+		return true;
 	}
 
-	public static void RESET() {
-
+	public boolean RESET() {
+		System.out.println(this.program.erase());
+		return true;
 	}
 
-	public static void REPLACE() {
-
+	public boolean REPLACE(int pos) {
+		ByteCode BC = ByteCodeParser.parse(sc.nextLine());
+		this.program.replacePosition(BC, pos);
+		System.out.println(this.program.toString());
+		return true;
 	}
 
-	public static void start() {
+	public void start() {
 		
 		while (finalBucle == 1) {
-			Scanner sc = new Scanner(System.in);
-			String comando = sc.next();
-			Command obj3 = CommandParse.parse(comando);
-			obj3.execute(null);
+			this.comando = CommandParse.parse(sc.nextLine());
+			if(this.comando.getByteCode() == null) {
+				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + "\n");
+			}
+			else {
+				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + " " + this.comando.getByteCode() + "\n");
+			}
+			this.comando.execute(this);
 		}
 	}
 }

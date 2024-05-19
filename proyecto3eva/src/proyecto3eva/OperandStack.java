@@ -22,13 +22,15 @@ public class OperandStack {
 	
 	public String ToString() {
 		String frase = "Pila: ";
-		if(isEmpty() == true) {
+		if(isEmpty() == false) {
 			for(int i = 0; i < stack.length; i++) {
-				frase += stack[i];
+				if(stack[i] != 0) {
+					frase = frase + stack[i] + " ";
+				}
 			}
 		}
 		else {
-			frase = "<vacía>";
+			frase = frase + "<vacía>";
 		}
 		return frase;
 	}
@@ -50,6 +52,7 @@ public class OperandStack {
 		}
 		else {
 			int cima = stack[numElem - 1];
+			stack[numElem - 1] = 0;
 			numElem--;
 			return cima;
 		}
