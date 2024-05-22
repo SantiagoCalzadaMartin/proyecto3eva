@@ -80,12 +80,12 @@ public class CPU {
 	 * @return
 	 */
 	public boolean sumaPila() {
-		if(pila.pop() == -1) {
-			return false;
-		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
+		if(num1 == -1 || num2 == -1) {
+			return false;
+		}
 		int suma = num2 + num1;
 		pila.push(suma);
 		return true;
@@ -96,12 +96,12 @@ public class CPU {
 	 * @return
 	 */
 	public boolean restaPila() {
-		if(pila.pop() == -1) {
-			return false;
-		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
+		if(num1 == -1 || num2 == -1) {
+			return false;
+		}
 		int suma = num2 - num1;
 		pila.push(suma);
 		return true;
@@ -112,12 +112,12 @@ public class CPU {
 	 * @return
 	 */
 	public boolean multiplicaPila() {
-		if(pila.pop() == -1) {
-			return false;
-		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
+		if(num1 == -1 || num2 == -1) {
+			return false;
+		}
 		int suma = num2 * num1;
 		pila.push(suma);
 		return true;
@@ -128,12 +128,12 @@ public class CPU {
 	 * @return
 	 */
 	public boolean dividePila() {
-		if(pila.pop() == -1) {
-			return false;
-		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
+		if(num1 == -1 || num2 == -1) {
+			return false;
+		}
 		int suma = num2 / num1;
 		pila.push(suma);
 		return true;
