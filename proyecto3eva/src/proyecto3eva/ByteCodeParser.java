@@ -1,7 +1,11 @@
 package proyecto3eva;
 
 public class ByteCodeParser {
-	
+	/**
+	 * metodo statico parse que analiza cual es el bytecode introducido por el usuario
+	 * @param s
+	 * @return
+	 */
 	public static ByteCode parse(String s) {
 		String[] arrayByteCode = s.split(" ");
 		if(arrayByteCode.length <= 0 || arrayByteCode.length > 2) {

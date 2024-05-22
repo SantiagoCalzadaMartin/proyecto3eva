@@ -4,36 +4,60 @@ import java.util.Scanner;
 
 public class Command {
 
-	public static int fin = 0;
+	public static int fin;
 	private ENUM_COMMAND command;
 	private ByteCode instruction;
 	private int replace;
-	
+	/**
+	 *constructora por defecto de command
+	 */
+	public Command() {
+		this.fin = 0;
+	}
+	/**
+	 * constructora de comandos con bytecode de command
+	 * @param command
+	 * @param instruccion
+	 */
 	public Command(ENUM_COMMAND command, ByteCode instruccion) {
 		this.command = command;
 		this.instruction = instruccion;
 	}
-
+	/**
+	 * constructora de comandos de command
+	 * @param command
+	 */
 	public Command(ENUM_COMMAND command) {
 		this.command = command;
 	}
-
+	/**
+	 * constructora de replace de command
+	 * @param command
+	 * @param replace
+	 */
 	public Command(ENUM_COMMAND command, int replace) {
 		this.command = command;
 		this.replace = replace;
 	}
-	
+	/**
+	 * metodo getcommand que devuelve el comando
+	 * @return
+	 */
 	public ENUM_COMMAND getCommand() {
 		return this.command;
 	}
-
+	/**
+	 * metodo getbytecode que devuelve el bytecode
+	 * @return
+	 */
 	public ByteCode getByteCode() {
 		return this.instruction;
 	}
-	
-	public Command() {
-	}
-
+	/**
+	 * metodo execute que ejecuta los comandos mandados de engine
+	 * @param engine
+	 * @return
+	 */
 	public boolean execute(Engine engine) {
 		do {
 			switch(command) {

@@ -5,13 +5,13 @@ public enum ENUM_COMMAND {
 	private int valueArg;
 	
 	/**
-	 * Constructora
+	 * Constructora simple de enum_command
 	 */
 	ENUM_COMMAND() {
 		this.valueArg = 0;
 	}
 	/**
-	 * Constructora
+	 * Constructora donde recibe un parametro de enum_command
 	 * @param n
 	 */
 	ENUM_COMMAND(int n) {

@@ -5,13 +5,13 @@ public enum ENUM_BYTECODE {
 	private int valueArg;
 	
 	/**
-	 * Constructora
+	 * Constructora simple de enum_bytecode
 	 */
 	ENUM_BYTECODE() {
 		this.valueArg = 0;
 	}
 	/**
-	 * Constructora
+	 * Constructora donde recibe un parametro de enum_bytecode
 	 * @param n
 	 */
 	ENUM_BYTECODE(int n) {

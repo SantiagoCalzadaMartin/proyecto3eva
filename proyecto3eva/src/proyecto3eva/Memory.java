@@ -1,10 +1,23 @@
 	package proyecto3eva;
 
 public class Memory {
-	boolean isEmpty = true;
-	int Size = 10;
-	Integer memory[] = new Integer[Size];
-
+	boolean isEmpty;
+	int Size;
+	Integer memory[];
+	/**
+	 * constructora de memory
+	 */
+	public Memory() {
+		this.isEmpty = true;
+		this.Size = 10;
+		this.memory = new Integer[Size];
+	}
+	/**
+	 * metodo boleano write que escribe el valor en la posicion indicada si se puede
+	 * @param pos
+	 * @param value
+	 * @return
+	 */
 	public boolean Write(int pos, int value) {
 		if (pos >= 0) {
 			this.ReSize(pos);
@@ -14,7 +27,11 @@ public class Memory {
 			return false;
 		}
 	}
-
+	/**
+	 * metodo read que devuelve el valor de la posicion indicada de memory
+	 * @param pos
+	 * @return
+	 */
 	public int Read(int pos) {
 		int retorno;
 		if(this.memory[pos] == null) {
@@ -28,7 +45,10 @@ public class Memory {
 			return retorno;
 		}
 	}
-
+	/**
+	 * metodo resize que aumenta el tamaño de memory a la posicion indicada * 2
+	 * @param pos
+	 */
 	public void ReSize(int pos) {
 		this.isEmpty = false;
 		if (pos >= memory.length) {
@@ -39,7 +59,10 @@ public class Memory {
 			this.memory = memory2;
 		}
 	}
-
+	/**
+	 * metodo tostring que cambia el contenido de memory a string
+	 * @return
+	 */
 	public String ToString() {
 		String fraseFinal = "Memoria: ";
 		String fraseIntermedia = "";

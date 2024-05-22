@@ -8,14 +8,19 @@ public class Engine {
 	private CPU cpu;
 	private Command comando;
 	Scanner sc;
-
+	/**
+	 * Constructora de engine
+	 */
 	public Engine() {
 		this.program = new ByteCodeProgram();
 		this.cpu = new CPU();
 		this.comando = new Command();
 		this.sc = new Scanner(System.in);
 	}
-
+	/**
+	 * metodo boleano help que muestra el menu
+	 * @return
+	 */
 	public boolean HELP() {
 		System.out.println("HELP: muestra esta ayuda");
 		System.out.println("QUIT: cierra la aplicación");
@@ -25,21 +30,31 @@ public class Engine {
 		System.out.println("REPLACE: reemplaza n instrucción por la del usuario");
 		return true;
 	}
-
+	/**
+	 * metodo boleano quit que termina la ejecución del programa
+	 * @return
+	 */
 	public boolean QUIT() {
 		System.out.println("Saliste del programa");
 		finalBucle = 0;
 		return true;
 	}
-
+	/**
+	 * metodo boleano run que ejecuta el programa almacenado
+	 * @return
+	 */
 	public boolean RUN() {
 		System.out.println(this.program.runProgram(this.cpu) + this.program.toString());
 		return true;
 	}
-
+	/**
+	 * metodo boleano newinst bytecode que almacena los bytecode de los comandos
+	 * @param BC
+	 * @return
+	 */
 	public boolean NEWINST_BYTECODE(ByteCode BC) {
 		if(BC == null) {
-			System.out.println("Error: ejecución incorrecta del comando");
+			System.err.println("Error: ejecución incorrecta del comando");
 		    return false;
 		}
 		else {
@@ -48,15 +63,22 @@ public class Engine {
 			return true;
 		}
 	}
-
+	/**
+	 * metodo boleano reset que resetea el programa
+	 * @return
+	 */
 	public boolean RESET() {
 		this.program.erase();
 		return true;
 	}
-
+	/**
+	 * metodo boleano replace que cambia un comando de una posición especifica del programa
+	 * @param pos
+	 * @return
+	 */
 	public boolean REPLACE(int pos) {
-		if (pos >= this.program.NumElements) {
-			System.out.println("Error: ejecución incorrecta del comando");
+		if (pos >= this.program.NumElements || pos < 0) {
+			System.err.println("Error: ejecución incorrecta del comando");
 			return false;
 		} else {
 			System.out.println("Introduce el nuevo comando");
@@ -72,13 +94,15 @@ public class Engine {
 			}
 		}
 	}
-
+	/**
+	 * metodo start que ejecuta el programa
+	 */
 	public void start() {
 
 		while (finalBucle == 1) {
 			this.comando = CommandParse.parse(sc.nextLine());
 			if (this.comando == null) {
-				System.out.println("Error: ejecución incorrecta del comando");
+				System.err.println("Error: ejecución incorrecta del comando");
 			} else if(this.comando.getCommand() != null && this.comando.getByteCode() == null){
 				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + " "
 						+ "\n");				

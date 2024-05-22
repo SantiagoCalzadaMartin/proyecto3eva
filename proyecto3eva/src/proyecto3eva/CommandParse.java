@@ -1,7 +1,11 @@
 package proyecto3eva;
 
 public class CommandParse {
-	//Exactamente igual a la teoria de ByteCodeParser	
+	/**
+	 * metodo statico parse que analiza cual es el comando introducido por el usuario
+	 * @param line
+	 * @return
+	 */
 	public static Command parse(String line) {
 		String cadena[] = line.split(" ");
 		if(cadena.length <= 0) {
