@@ -24,31 +24,35 @@ public class CPU {
 	public boolean execute(ByteCode instr) {
 		switch(instr.getByteCode()) {
 			case ADD:
-				sumaPila();
-				return true;
+				return sumaPila();
 			case SUB:
-				restaPila();
-				return true;
+				return restaPila();
 			case MUL:
-				multiplicaPila();
-				return true;
+				return multiplicaPila();
 			case DIV:
-				dividePila();
-				return true;
+				return dividePila();
 			case OUT:
+				if(pila.peek() == -1) {
+					return false;
+				}
 				System.out.println("La cima de la pila es: " + pila.peek());
 				return true;
 			case HALT:
 				return this.halt = true;
 			case STORE:
+				if(this.pila.pop() == -1) {
+					return false;
+				}
 				this.memoria.Write(instr.getParam(), this.pila.pop());
 				return true;
 			case LOAD:
+				if(this.memoria.Read(instr.getParam()) == -1) {
+					return false;
+				}
 				this.pila.push(this.memoria.Read(instr.getParam()));
 				return true;
 			case PUSH:
-				this.pila.push(instr.getParam());
-				return true;
+				return this.pila.push(instr.getParam());
 			 default:
 				return false;
 		}
@@ -59,6 +63,9 @@ public class CPU {
 	}
 
 	public boolean sumaPila() {
+		if(pila.pop() == -1) {
+			return false;
+		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
@@ -68,6 +75,9 @@ public class CPU {
 	}
 
 	public boolean restaPila() {
+		if(pila.pop() == -1) {
+			return false;
+		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
@@ -77,6 +87,9 @@ public class CPU {
 	}
 
 	public boolean multiplicaPila() {
+		if(pila.pop() == -1) {
+			return false;
+		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
@@ -86,6 +99,9 @@ public class CPU {
 	}
 
 	public boolean dividePila() {
+		if(pila.pop() == -1) {
+			return false;
+		}
 		int num1 = pila.pop();
 		int num2 = pila.pop();
 
@@ -97,5 +113,4 @@ public class CPU {
 	public boolean runCPU() {
 		return this.halt = false;
 	}
-	// todos los bytecode que se pueden poner
 }

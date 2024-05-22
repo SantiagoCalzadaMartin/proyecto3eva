@@ -69,10 +69,12 @@ public class ByteCodeProgram {
 	public String runProgram(CPU cpu) {
 		String mensaje = "";
 		for (int i = 0; i < this.NumElements; i++) {
+			mensaje = mensaje + " Comienza la ejecución del comando " + this.program[i];
 			if (!cpu.isHalt() && cpu.execute(this.program[i])) {
-				mensaje = mensaje + "Comienza la ejecución del comando " + this.program[i] + "\n" + "Estado de la CPU: " + "\n" + cpu.toString() + "\n";
-			} else if (!cpu.isHalt()) {
-				//mensaje += (""); Esto es un ms de error
+				mensaje = mensaje + "\n" + "Estado de la CPU: " + "\n" + cpu.toString() + "\n";
+			}else if (!cpu.isHalt()) {
+				mensaje = mensaje + "\n" + "Error: ejecución incorrecta del comando" + "\n";
+				this.program.toString();
 			}
 		}
 		cpu.erase();

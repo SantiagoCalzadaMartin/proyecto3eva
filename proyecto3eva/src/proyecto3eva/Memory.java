@@ -17,7 +17,10 @@ public class Memory {
 
 	public int Read(int pos) {
 		int retorno;
-		if (memory[pos] >= 0) {
+		if(this.memory[pos] == null) {
+			retorno = -1;
+			return retorno;
+		} else if (memory[pos] >= 0) {
 			retorno = memory[pos];
 			return retorno;
 		} else {
@@ -30,13 +33,8 @@ public class Memory {
 		this.isEmpty = false;
 		if (pos >= memory.length) {
 			Integer memory2[] = new Integer[pos * 2];
-			for(int  i = 0; i < memory2.length; i++) {
-				if(i <= memory.length) {
-					memory2[i] = memory[i];
-				}
-				else {
-					memory2[i] = null;
-				}
+			for(int  i = 0; i < memory.length; i++) {
+				memory2[i] = memory[i];
 			}
 			this.memory = memory2;
 		}

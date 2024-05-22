@@ -8,7 +8,7 @@ public class Engine {
 	private CPU cpu;
 	private Command comando;
 	Scanner sc;
-	
+
 	public Engine() {
 		this.program = new ByteCodeProgram();
 		this.cpu = new CPU();
@@ -38,9 +38,15 @@ public class Engine {
 	}
 
 	public boolean NEWINST_BYTECODE(ByteCode BC) {
-		this.program.setPosition(BC);
-		System.out.println(this.program.toString());
-		return true;
+		if(BC == null) {
+			System.out.println("Error: ejecución incorrecta del comando");
+		    return false;
+		}
+		else {
+			this.program.setPosition(BC);
+			System.out.println(this.program.toString());
+			return true;
+		}
 	}
 
 	public boolean RESET() {
@@ -49,23 +55,40 @@ public class Engine {
 	}
 
 	public boolean REPLACE(int pos) {
-		ByteCode BC = ByteCodeParser.parse(sc.nextLine());
-		this.program.replacePosition(BC, pos);
-		System.out.println(this.program.toString());
-		return true;
+		if (pos >= this.program.NumElements) {
+			System.out.println("Error: ejecución incorrecta del comando");
+			return false;
+		} else {
+			System.out.println("Introduce el nuevo comando");
+			ByteCode BC = ByteCodeParser.parse(sc.nextLine());
+			if(BC == null) {
+				System.out.println("Error: ejecución incorrecta del comando");
+				return false;
+			}
+			else {
+				this.program.replacePosition(BC, pos);
+				System.out.println(this.program.toString());
+				return true;
+			}
+		}
 	}
 
 	public void start() {
-		
+
 		while (finalBucle == 1) {
 			this.comando = CommandParse.parse(sc.nextLine());
-			if(this.comando.getByteCode() == null) {
-				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + "\n");
+			if (this.comando == null) {
+				System.out.println("Error: ejecución incorrecta del comando");
+			} else if(this.comando.getCommand() != null && this.comando.getByteCode() == null){
+				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + " "
+						+ "\n");				
+				this.comando.execute(this);
 			}
-			else {
-				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + " " + this.comando.getByteCode() + "\n");
+			else if(this.comando.getCommand() != null && this.comando.getByteCode() != null) {
+				System.out.println("Comienza la ejecución del comando " + this.comando.getCommand() + " "
+						+ this.comando.getByteCode() + "\n");				
+				this.comando.execute(this);
 			}
-			this.comando.execute(this);
 		}
 	}
 }
